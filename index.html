@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semeando Trocas - Agrinho</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="modal-boas-vindas" class="modal-overlay">
+        <div class="modal-conteudo">
+            <h2>🌱 Bem-vindo ao Semeando Trocas!</h2>
+            <p>Para começarmos a conectar nossa rede, como você se chama?</p>
+            <input type="text" id="input-nome-usuario" placeholder="Digite seu nome ou da sua propriedade...">
+            <button id="btn-salvar-nome">Entrar no Mural</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>🌱 Semeando Trocas</h1>
+        <p>Conectando produtores, reduzindo desperdícios e fortalecendo o Agro local.</p>
+
+        <button id="btn-dark-mode">
+            🌙 Modo Escuro
+        </button>
+    </header>
+
+    <div class="container">
+
+        <section id="sobre" class="area-sobre">
+            <div class="sobre-imagem">
+                <img src="Caminho na natureza.png" alt="Caminho na natureza">
+            </div>
+
+            <div class="sobre-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="abrirAba(event, 'historia')">História</button>
+                    <button class="tab-btn" onclick="abrirAba(event, 'visao')">Visão</button>
+                    <button class="tab-btn" onclick="abrirAba(event, 'metas')">Metas</button>
+                </div>
+
+                <div class="tabs-body">
+                    <div id="historia" class="tab-content active">
+                        <h3>Nossa História: Da Terra para a Tela</h3>
+                        <p>O <strong>Semeando Trocas</strong> nasceu da observação atenta da nossa realidade no campo.
+                            Percebemos que, muitas vezes, a falta de comunicação isola excelentes produtores. Enquanto
+                            um vizinho descarta sementes crioulas que sobraram da safra, outro gasta recursos comprando
+                            o mesmo material na cidade. Decidimos usar a tecnologia que aprendemos em sala de aula não
+                            para afastar as pessoas, mas para resgatar a tradição mais antiga da agricultura: a
+                            colaboração mútua. Somos a ponte digital que valoriza o suor de quem planta.</p>
+                    </div>
+
+                    <div id="visao" class="tab-content">
+                        <h3>Nossa Visão: O Desperdício Zero</h3>
+                        <p>Acreditamos em um ecossistema agrícola onde nada se perde, tudo se transforma e tudo se
+                            troca. Nossa visão é consolidar a <strong>Economia Circular</strong> na nossa região,
+                            provando que o desenvolvimento sustentável é possível quando unimos o conhecimento técnico à
+                            força do agronegócio local. Queremos que a tecnologia seja uma ferramenta acessível na palma
+                            da mão de cada pequeno e médio produtor, tornando o campo mais inteligente, unido e
+                            ecologicamente responsável.</p>
+                    </div>
+
+                    <div id="metas" class="tab-content">
+                        <h3>Nossas Metas: Conexão e Impacto</h3>
+                        <p>Nosso objetivo é prático e direto: <strong>reduzir o desperdício de insumos e diminuir os
+                                custos de produção</strong>. Através deste mural interativo, nossa meta é garantir que:
+                        </p>
+                        <ul class="lista-metas">
+                            <li>Sementes, mudas e adubos excedentes encontrem um novo solo fértil em menos de 24 horas.
+                            </li>
+                            <li>Produtores locais reduzam gastos trocando o que têm de sobra pelo que precisam.</li>
+                            <li>A tecnologia atue como um motor de sustentabilidade e rentabilidade para as famílias do
+                                campo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside id="cadastro" class="area-cadastro">
+            <h2>Cadastrar Nova Troca</h2>
+            <form id="form-troca">
+                <div class="grupo-form">
+                    <label for="nome">Seu Nome / Propriedade:</label>
+                    <input type="text" id="nome" required placeholder="Ex: Sítio São João">
+                </div>
+                <div class="grupo-form">
+                    <label for="oferece">O que você tem sobrando? (Ofereço):</label>
+                    <input type="text" id="oferece" required placeholder="Ex: sementes de milho">
+                </div>
+                <div class="grupo-form">
+                    <label for="precisa">O que você está precisando? (Preciso):</label>
+                    <input type="text" id="precisa" required placeholder="Ex: adubo orgânico">
+                </div>
+                <button type="submit" class="btn-cadastrar">Publicar no Mural</button>
+            </form>
+        </aside>
+
+        <section id="mural-trocas" class="area-mural">
+            <h2 class="titulo-mural">Mural de Oportunidades</h2>
+            <div class="mural-grid" id="mural">
+                </div>
+        </section>
+
+        <section class="area-regioes">
+            <div class="regioes-texto">
+                <p class="subtitulo-regiao">Como as entregas funcionam?</p>
+                <h2>Trocas locais.<br><span class="destaque-verde">Nossa região.</span></h2>
+
+                <a href="cadastro.html" class="btn-regiao link-botao">Faça parte da rede</a>
+            </div>
+
+            <div class="regioes-lista">
+                <div class="item-regiao">
+                    <h3>📍 Ibiporã (Sede)</h3>
+                    <p>Ponto central do projeto. Combine a troca diretamente nas feiras da cidade, escolas agrícolas ou
+                        propriedades locais.</p>
+                </div>
+
+                <div class="item-regiao">
+                    <h3>📍 Londrina e Cambé</h3>
+                    <p>Rede integrada! As trocas podem ser facilmente agendadas entre os produtores nas zonas rurais e
+                        urbanas vizinhas.</p>
+                </div>
+
+                <div class="item-regiao sem-borda">
+                    <h3>🤝 Combine o Local</h3>
+                    <p>A plataforma conecta a necessidade, e vocês decidem a logística! Combine o melhor local e horário
+                        pelo chat da troca.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="rodape-principal">
+        <div class="container-rodape">
+
+            <div class="rodape-topo">
+                <div class="rodape-logo">
+                    <h2>🌱 Semeando Trocas</h2>
+                </div>
+                <div class="rodape-redes">
+                    <span>Acompanhe nas redes</span>
+                    <div class="icones-redes">
+                        <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divisor-rodape">
+
+            <div class="rodape-meio">
+                <div class="rodape-coluna info-projeto">
+                    <h3>Projeto Agrinho 2026</h3>
+                    <p>Desenvolvido para fortalecer a economia circular e conectar produtores rurais de forma inteligente e sustentável.</p>
+                    <p class="espaco-medio"><strong>CEEP Ibiporã</strong><br>Ibiporã, PR - Brasil</p>
+                    <p class="espaco-pequeno">Turma: 1º IA</p>
+                </div>
+                
+                <div class="rodape-coluna links-rapidos">
+                    <h3>Acesso rápido</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="index.html#sobre">Sobre o Projeto</a></li>
+                        <li><a href="index.html#mural-trocas">Mural de Trocas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="rodape-coluna links-ajuda">
+                    <h3>Ajuda</h3>
+                    <ul>
+                        <li><a href="ajuda.html#fale-conosco">Fale conosco</a></li>
+                        <li><a href="ajuda.html#faq">Dúvidas Frequentes (FAQ)</a></li>
+                        <li><a href="ajuda.html#como-funciona">Como funciona a troca?</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="divisor-rodape">
+
+            <div class="rodape-base">
+                <div class="rodape-copy">
+                    <p>© 2026 - Semeando Trocas. Todos os direitos reservados. | <a href="#">Termos de Uso</a> | <a
+                            href="#">Políticas de Privacidade</a></p>
+                </div>
+                <div class="rodape-marca">
+                    <span class="texto-credito">Um projeto <strong>Alunos 1º Programação e IA</strong></span>
+                    <button id="btn-voltar-topo" class="btn-voltar-topo" title="Voltar ao topo">↑</button>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
