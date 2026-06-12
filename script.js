@@ -1,22 +1,108 @@
 // ==========================================
-// 1. DADOS INICIAIS (Array de objetos)
+// 1. SIMULAÇÃO DE BANCO DE DADOS (FUTURO BACKEND)
 // ==========================================
-let anunciosCadastrados = [
-    { id: 1, produtor: "Dona Maria", oferece: "mudas de alface", precisa: "húmus de minhoca" },
-    { id: 2, produtor: "Carlos (Horta Comunitária)", oferece: "esterco bovino", precisa: "sementes de abóbora" }
-];
+const BancoDeDadosSemeando = {
+    usuarios: [
+        { id: 1, nome: "Dona Maria", contato: "(43) 99999-0001" },
+        { id: 2, nome: "Carlos (Horta Comunitária)", contato: "(43) 99999-0002" }
+    ],
+    anuncios: [
+        { id: 1, idUsuario: 1, produtor: "Dona Maria", oferece: "mudas de alface", precisa: "húmus de minhoca" },
+        { id: 2, idUsuario: 2, produtor: "Carlos (Horta Comunitária)", oferece: "esterco bovino", precisa: "sementes de abóbora" }
+    ],
+    historicoTrocas: []
+};
+
+let anunciosCadastrados = BancoDeDadosSemeando.anuncios;
 
 // ==========================================
-// 2. FUNÇÕES PRINCIPAIS DO MURAL (index.html)
+// 2. FUNÇÃO DO NOVO MODAL DE ALERTA
 // ==========================================
+function mostrarAlerta(titulo, mensagem) {
+    const modal = document.getElementById('modal-alerta');
+    
+    // Se a página não tiver o modal criado no HTML, usa o alerta padrão como segurança
+    if (!modal) {
+        alert(titulo + "\n\n" + mensagem);
+        return;
+    }
 
+    const tituloEl = document.getElementById('modal-alerta-titulo');
+    const mensagemEl = document.getElementById('modal-alerta-mensagem');
+    const btnFechar = document.getElementById('btn-fechar-alerta');
+
+    tituloEl.textContent = titulo;
+    mensagemEl.textContent = mensagem;
+
+    modal.classList.add('mostrar');
+
+    btnFechar.onclick = () => {
+        modal.classList.remove('mostrar');
+    };
+}
+
+// ==========================================
+// 3. REGISTRAR TROCA NO BANCO
+// ==========================================
+function registrarIntencaoDeTroca(idAnuncioAlvo) {
+    const nomeInteressado = localStorage.getItem('nomeProdutor') || "Produtor(a) Visitante";
+    const anuncioOriginal = anunciosCadastrados.find(anuncio => anuncio.id === idAnuncioAlvo);
+
+    if (anuncioOriginal) {
+        const novaProposta = {
+            idTroca: BancoDeDadosSemeando.historicoTrocas.length + 1,
+            idAnuncio: idAnuncioAlvo,
+            de: nomeInteressado,
+            para: anuncioOriginal.produtor,
+            status: "Pendente",
+            data: new Date().toLocaleDateString('pt-BR')
+        };
+
+        BancoDeDadosSemeando.historicoTrocas.push(novaProposta);
+
+        console.clear();
+        console.log("💾 NOVO REGISTRO NO BANCO DE DADOS SIMULADO:");
+        console.table(BancoDeDadosSemeando.historicoTrocas);
+        
+        // AQUI: Usando o novo modal customizado em vez do alert()
+        mostrarAlerta(
+            '✅ Proposta Enviada!', 
+            `Sua intenção de troca foi registrada.\n\nDe: ${nomeInteressado}\nPara: ${anuncioOriginal.produtor}\n\nAguarde o retorno no painel de notificações.`
+        );
+        
+        atualizarMural();
+        atualizarPainelDeNotificacoes();
+    }
+}
+
+// ==========================================
+// 4. FUNÇÕES PRINCIPAIS DO MURAL E NOTIFICAÇÕES
+// ==========================================
 function atualizarMural() {
     const containerMural = document.getElementById('mural');
-    if (!containerMural) return; 
+    if (!containerMural) return;
 
-    containerMural.innerHTML = ""; 
+    containerMural.innerHTML = "";
+    const nomeLogado = localStorage.getItem('nomeProdutor') || "Produtor(a) Visitante";
 
     anunciosCadastrados.forEach(anuncio => {
+        const propostaExistente = BancoDeDadosSemeando.historicoTrocas.find(
+            t => t.idAnuncio === anuncio.id && t.de === nomeLogado && t.status === "Pendente"
+        );
+
+        let botoesHTML = "";
+
+        if (propostaExistente) {
+            botoesHTML = `
+                <button class="btn-em-analise">⏳ Em Análise</button>
+                <button class="btn-cancelar" onclick="cancelarMinhaProposta(${propostaExistente.idTroca})">Cancelar</button>
+            `;
+        } else {
+            botoesHTML = `
+                <button class="btn-trocar" onclick="registrarIntencaoDeTroca(${anuncio.id})">Propor Troca</button>
+            `;
+        }
+
         const cardHTML = `
             <div class="card">
                 <div class="card-header">
@@ -29,7 +115,7 @@ function atualizarMural() {
                     <p><strong>Buscando por:</strong> <span style="text-transform: capitalize;">${anuncio.precisa}</span></p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn-trocar" onclick="alert('Funcionalidade de chat/contato em desenvolvimento!')">Propor Troca</button>
+                    ${botoesHTML}
                 </div>
             </div>
         `;
@@ -37,29 +123,44 @@ function atualizarMural() {
     });
 }
 
+function cancelarMinhaProposta(idTroca) {
+    const index = BancoDeDadosSemeando.historicoTrocas.findIndex(t => t.idTroca === idTroca);
+    
+    if (index !== -1) {
+        BancoDeDadosSemeando.historicoTrocas.splice(index, 1);
+        
+        // AQUI: Modal customizado
+        mostrarAlerta("🗑️ Cancelado", "Sua proposta foi cancelada e removida do mural.");
+        
+        atualizarMural();
+        atualizarPainelDeNotificacoes();
+    }
+}
+
 function buscarMatchPerfeito(novoAnuncio) {
     const matchesEncontrados = anunciosCadastrados.filter(anuncio => {
         const ofertaCombina = anuncio.oferece.trim().toLowerCase() === novoAnuncio.precisa.trim().toLowerCase();
         const necessidadeCombina = anuncio.precisa.trim().toLowerCase() === novoAnuncio.oferece.trim().toLowerCase();
-        
         return ofertaCombina && necessidadeCombina;
     });
 
     if (matchesEncontrados.length > 0) {
         const parceiro = matchesEncontrados[0];
-        alert(`🎉 MATCH PERFEITO ENCONTRADO!\n\n${parceiro.produtor} tem exatamente o que você precisa (${novoAnuncio.precisa}) e está procurando pelo seu (${novoAnuncio.oferece})!`);
+        // AQUI: Modal customizado
+        mostrarAlerta(
+            "🎉 MATCH PERFEITO!", 
+            `${parceiro.produtor} tem exatamente o que você precisa (${novoAnuncio.precisa}) e está procurando pelo seu (${novoAnuncio.oferece})!`
+        );
     }
 }
 
 // ==========================================
-// 3. EVENTOS DO MURAL E INTERFACE (index.html)
+// 5. EVENTOS DO MURAL E INTERFACE
 // ==========================================
-
-// Captura envio de nova troca no mural
 const formTroca = document.getElementById('form-troca');
 if (formTroca) {
-    formTroca.addEventListener('submit', function(evento) {
-        evento.preventDefault(); 
+    formTroca.addEventListener('submit', function (evento) {
+        evento.preventDefault();
 
         const nomeDigitado = document.getElementById('nome').value;
         const ofereceDigitado = document.getElementById('oferece').value;
@@ -76,15 +177,14 @@ if (formTroca) {
         anunciosCadastrados.push(novoAnuncio);
         atualizarMural();
         formTroca.reset();
-        
-        alert('🌱 Anúncio publicado com sucesso no mural!');
+
+        // AQUI: Modal customizado
+        mostrarAlerta('🌱 Sucesso!', 'Anúncio publicado com sucesso no mural!');
     });
 }
 
-// Lógica de Saudação e Modal
 function saudarUsuario() {
     let nomeUsuario = localStorage.getItem('nomeProdutor');
-    
     const headerP = document.querySelector('header p');
     const modal = document.getElementById('modal-boas-vindas');
     const btnSalvar = document.getElementById('btn-salvar-nome');
@@ -103,7 +203,7 @@ function saudarUsuario() {
             btnSalvar.addEventListener('click', () => {
                 let nomeDigitado = inputNome.value.trim();
                 if (nomeDigitado === "") {
-                    nomeDigitado = "Produtor(a)"; 
+                    nomeDigitado = "Produtor(a)";
                 }
                 localStorage.setItem('nomeProdutor', nomeDigitado);
                 atualizarTextoHeader(nomeDigitado);
@@ -115,7 +215,6 @@ function saudarUsuario() {
     }
 }
 
-// Alternar Modo Escuro/Claro
 const btnDarkMode = document.getElementById('btn-dark-mode');
 if (btnDarkMode) {
     btnDarkMode.addEventListener('click', () => {
@@ -128,62 +227,120 @@ if (btnDarkMode) {
     });
 }
 
-// Guias (Tabs) de História, Visão e Metas
 function abrirAba(evento, idAba) {
     const conteudos = document.querySelectorAll('.tab-content');
-    conteudos.forEach(conteudo => {
-        conteudo.classList.remove('active');
-    });
+    conteudos.forEach(conteudo => conteudo.classList.remove('active'));
 
     const botoes = document.querySelectorAll('.tab-btn');
-    botoes.forEach(botao => {
-        botao.classList.remove('active');
-    });
+    botoes.forEach(botao => botao.classList.remove('active'));
 
     const abaSelecionada = document.getElementById(idAba);
     if (abaSelecionada) abaSelecionada.classList.add('active');
-    
+
     evento.currentTarget.classList.add('active');
 }
 
-// Botão de voltar ao topo no rodapé
 const btnVoltarTopo = document.getElementById('btn-voltar-topo');
 if (btnVoltarTopo) {
     btnVoltarTopo.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 
 // ==========================================
-// 4. INICIALIZAÇÃO DA PÁGINA PRINCIPAL
+// 6. INICIALIZAÇÃO DA PÁGINA PRINCIPAL
 // ==========================================
 saudarUsuario();
 atualizarMural();
+atualizarPainelDeNotificacoes();
 
 // ==========================================
-// 5. LÓGICA DA PÁGINA DE CADASTRO (cadastro.html)
+// 7. LÓGICA DA PÁGINA DE CADASTRO
 // ==========================================
 const formDadosPessoais = document.getElementById('form-dados-pessoais');
 if (formDadosPessoais) {
-    formDadosPessoais.addEventListener('submit', function(evento) {
-        evento.preventDefault(); // Impede o recarregamento padrão da página
-
-        // Captura o nome digitado no formulário
+    formDadosPessoais.addEventListener('submit', function (evento) {
+        evento.preventDefault();
         const nomeCompleto = document.getElementById('nome-completo').value.trim();
 
-        // Se o usuário digitou o nome, salva no armazenamento do navegador
         if (nomeCompleto !== "") {
-            // Pega o primeiro nome para a saudação ficar amigável
             const primeiroNome = nomeCompleto.split(" ")[0];
             localStorage.setItem('nomeProdutor', primeiroNome);
         }
 
         alert('✅ Cadastro realizado com sucesso! Bem-vindo à rede Semeando Trocas.');
-        
-        // Redireciona o usuário de volta para a página inicial
         window.location.href = 'index.html';
+    });
+}
+
+// ==========================================
+// 8. GERENCIAMENTO DE TROCAS (ACEITAR / CANCELAR)
+// ==========================================
+function aceitarTroca(idTroca) {
+    const troca = BancoDeDadosSemeando.historicoTrocas.find(t => t.idTroca === idTroca);
+    
+    if (troca) {
+        troca.status = "Aceita";
+        
+        // AQUI: Modal customizado
+        mostrarAlerta("✅ Troca Aceita!", `Você aceitou a proposta de ${troca.de}.\nVocês já podem combinar a entrega!`);
+        
+        console.clear();
+        console.log("🔄 STATUS ATUALIZADO NO BANCO SIMULADO:");
+        console.table(BancoDeDadosSemeando.historicoTrocas);
+        atualizarPainelDeNotificacoes();
+    }
+}
+
+function cancelarTroca(idTroca) {
+    const troca = BancoDeDadosSemeando.historicoTrocas.find(t => t.idTroca === idTroca);
+    
+    if (troca) {
+        troca.status = "Cancelada";
+        
+        // AQUI: Modal customizado
+        mostrarAlerta("❌ Troca Recusada", `Você recusou a proposta de ${troca.de}.`);
+        
+        console.clear();
+        console.log("🔄 STATUS ATUALIZADO NO BANCO SIMULADO:");
+        console.table(BancoDeDadosSemeando.historicoTrocas);
+        atualizarPainelDeNotificacoes();
+    }
+}
+
+function atualizarPainelDeNotificacoes() {
+    let painel = document.getElementById('painel-notificacoes');
+    
+    if (!painel) {
+        painel = document.createElement('div');
+        painel.id = 'painel-notificacoes';
+        const container = document.querySelector('.container');
+        if (container) {
+            container.appendChild(painel);
+        } else {
+             document.body.appendChild(painel);
+        }
+    }
+
+    painel.innerHTML = "<h3 class='titulo-notificacao'>Propostas Recebidas</h3>";
+
+    const propostasPendentes = BancoDeDadosSemeando.historicoTrocas.filter(t => t.status === "Pendente");
+
+    if (propostasPendentes.length === 0) {
+        painel.innerHTML += "<p class='notificacao-vazia'>Nenhuma nova proposta no momento. 🌱</p>";
+        return;
+    }
+
+    propostasPendentes.forEach(proposta => {
+        const notificacaoHTML = `
+            <div class="card-notificacao">
+                <p class="texto-notificacao"><strong>${proposta.de}</strong> quer fazer uma troca com você pelo anúncio ID: ${proposta.idAnuncio}</p>
+                <div class="botoes-notificacao">
+                    <button class="btn-aceitar-notificacao" onclick="aceitarTroca(${proposta.idTroca})">Aceitar</button>
+                    <button class="btn-recusar-notificacao" onclick="cancelarTroca(${proposta.idTroca})">Recusar</button>
+                </div>
+            </div>
+        `;
+        painel.innerHTML += notificacaoHTML;
     });
 }
