@@ -602,19 +602,20 @@ body.dark-mode .pergunta-faq p      { color: #bbb; }
     .sobre-imagem img { height: auto; }
     header h1         { font-size: 2rem; }
 
-    /* Seção de regiões no mobile */
+   /* Seção de regiões no mobile */
     .area-regioes {
         display: flex;
+        flex-direction: column; /* FORÇA O EMPILHAMENTO NO CELULAR */
         width: 100%;
         background-color: #0b4f36;
         color: white;
-        padding: 60px;
+        padding: 30px; /* Reduzido de 60px para não comer muita tela no celular */
         border-radius: 15px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         margin-top: 10vh;
         margin-bottom: 50px;
-        gap: 50px;
-        align-items: center;
+        gap: 30px; /* Reduzido de 50px para 30px para ficar mais harmonioso */
+        align-items: flex-start; /* Alinha o texto à esquerda em vez do centro */
     }
 
     .regioes-texto h2         { font-size: 2.2rem; }
