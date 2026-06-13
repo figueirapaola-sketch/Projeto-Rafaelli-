@@ -1,78 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajuda - Semeando Trocas</title>
-
-    <link rel="stylesheet" href="../assets/css/style.css">
+ 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
+ 
 <body>
-
+ 
     <header>
         <h1>🌱 Central de Ajuda</h1>
         <p>Tire suas dúvidas, entenda o projeto e fale com nossa equipe.</p>
         <button id="btn-dark-mode">🌙 Modo Escuro</button>
     </header>
-
-    <div class="container" style="flex-direction: column;">
-
-        <!-- Link para voltar ao topo/início de forma fácil -->
-        <div class="voltar-container" style="text-align: left; width: 100%; margin-bottom: 20px;">
-            <a href="../index.html" class="link-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar para o início</a>
+ 
+    <div class="container container-ajuda">
+ 
+        <div class="voltar-container">
             <a href="index.html" class="link-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar para o início</a>
         </div>
-
-        <!-- SEÇÃO: Como funciona a troca -->
+ 
         <section id="como-funciona" class="area-sobre area-ajuda">
             <div class="texto-ajuda">
-                <h2 style="color: #2e7d32; margin-bottom: 20px;">Como funciona a troca?</h2>
-                <ol class="lista-metas" style="font-size: 1.1rem; line-height: 1.8;">
-                    <li><strong>Publique no Mural:</strong> Cadastre o que você tem de sobra (oferece) e o que você
-                        precisa.</li>
-                    <li><strong>Deu Match?</strong> O sistema cruza os dados e avisa se alguém na rede tem o que você
-                        busca.</li>
-                    <li><strong>Combine a Logística:</strong> Entre em contato com o produtor e combinem a troca em um
-                        ponto seguro (como o CEEP Ibiporã ou feiras locais).</li>
-                    <li><strong>Pronto:</strong> Você reduziu desperdícios e fortaleceu a economia circular da nossa
-                        região!</li>
+                <h2>Como funciona a troca?</h2>
+                <ol class="lista-metas">
+                    <li><strong>Publique no Mural:</strong> Cadastre o que você tem de sobra (oferece) e o que você precisa.</li>
+                    <li><strong>Deu Match?</strong> O sistema cruza os dados e avisa se alguém na rede tem o que você busca.</li>
+                    <li><strong>Combine a Logística:</strong> Entre em contato com o produtor e combinem a troca em um ponto seguro (como o CEEP Ibiporã ou feiras locais).</li>
+                    <li><strong>Pronto:</strong> Você reduziu desperdícios e fortaleceu a economia circular da nossa região!</li>
                 </ol>
             </div>
         </section>
-
-        <!-- SEÇÃO: Dúvidas Frequentes (FAQ) -->
+ 
         <section id="faq" class="area-sobre area-ajuda">
             <div class="texto-ajuda">
-                <h2 style="color: #2e7d32; margin-bottom: 20px;">Dúvidas Frequentes (FAQ)</h2>
-
+                <h2>Dúvidas Frequentes (FAQ)</h2>
+ 
                 <div class="pergunta-faq">
-                    <h3 style="color: #ef6c00;">A plataforma cobra alguma taxa?</h3>
-                    <p>Não! O Semeando Trocas é um projeto 100% gratuito desenvolvido para o Agrinho 2026, com foco em
-                        ajudar a comunidade rural.</p>
+                    <h3>A plataforma cobra alguma taxa?</h3>
+                    <p>Não! O Semeando Trocas é um projeto 100% gratuito desenvolvido para o Agrinho 2026, com foco em ajudar a comunidade rural.</p>
                 </div>
-
-                <div class="pergunta-faq" style="margin-top: 20px;">
-                    <h3 style="color: #ef6c00;">Posso vender meus produtos aqui?</h3>
-                    <p>O foco principal da nossa plataforma é a <strong>troca solidária</strong> de insumos excedentes
-                        (economia circular). Porém, os produtores são livres para negociar vendas diretas pelo chat
-                        privado após o contato inicial.</p>
+ 
+                <div class="pergunta-faq espacamento-faq">
+                    <h3>Posso vender meus produtos aqui?</h3>
+                    <p>O foco principal da nossa plataforma é a <strong>troca solidária</strong> de insumos excedentes (economia circular). Porém, os produtores são livres para negociar vendas diretas pelo chat privado após o contato inicial.</p>
                 </div>
             </div>
         </section>
-
-        <!-- SEÇÃO: Fale Conosco (Formulário) -->
-        <section id="fale-conosco" class="area-cadastro area-cadastro-pagina"
-            style="margin: 0 auto; margin-bottom: 50px;">
+ 
+        <section id="fale-conosco" class="area-cadastro area-cadastro-pagina sec-fale-conosco">
             <h2>Fale conosco</h2>
-            <p style="margin-bottom: 20px; color: #555;">Encontrou algum problema ou quer dar uma sugestão? Mande uma
-                mensagem para a turma do 1º IA!</p>
-
-            <form action="../index.html" method="GET">
-            <form action="index.html" method="GET">
+            <p class="subtitulo-fale-conosco">Encontrou algum problema ou quer dar uma sugestão? Mande uma mensagem para a turma do 1º IA!</p>
+ 
+            <form id="form-contato" action="index.html" method="GET">
                 <div class="grupo-form">
                     <label for="nome-contato">Seu Nome:</label>
                     <input type="text" id="nome-contato" required placeholder="Digite seu nome">
@@ -83,20 +67,15 @@
                 </div>
                 <div class="grupo-form">
                     <label for="mensagem">Mensagem:</label>
-                    <!-- Usando um textarea limpo -->
-                    <textarea id="mensagem" required placeholder="Escreva sua dúvida ou sugestão aqui..."
-                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; min-height: 100px; font-family: inherit;"></textarea>
+                    <textarea id="mensagem" class="campo-mensagem" required placeholder="Escreva sua dúvida ou sugestão aqui..."></textarea>
                 </div>
-                <button type="submit" class="btn-cadastrar mt-20"
-                    onclick="alert('Mensagem enviada com sucesso! Nossa equipe do 1º IA responderá em breve.')">Enviar
-                    Mensagem</button>
+                <button type="submit" class="btn-cadastrar mt-20">Enviar Mensagem</button>
             </form>
         </section>
-
+ 
     </div>
-
-    <script src="../assets/js/script.js"></script>
+ 
     <script src="script.js"></script>
 </body>
-
+ 
 </html>

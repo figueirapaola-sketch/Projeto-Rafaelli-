@@ -309,6 +309,13 @@ function cancelarTroca(idTroca) {
 }
 
 function atualizarPainelDeNotificacoes() {
+    // 1. TRAVA DE SEGURANÇA: Verifica se estamos na página principal
+    // Se o 'mural' não existir na tela, não estamos no index.html. Então, interrompe a função.
+    const containerMural = document.getElementById('mural');
+    if (!containerMural) {
+        return; 
+    }
+
     let painel = document.getElementById('painel-notificacoes');
     
     if (!painel) {

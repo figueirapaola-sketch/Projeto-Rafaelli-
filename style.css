@@ -1,6 +1,17 @@
-/* ==========================================
+/* ============================================================
+   SEMEANDO TROCAS — Folha de Estilos Principal
+   Projeto: Agrinho 2026
+   Turma: 1º IA — CEEP Ibiporã
+   Descrição: Estilos globais compartilhados entre index.html,
+              cadastro.html e ajuda.html
+   ============================================================ */
+
+
+/* ============================================================
    1. RESET E BASE
-   ========================================== */
+   Zera margens e paddings padrão do navegador, define a fonte
+   global e comportamentos base do documento.
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -9,15 +20,16 @@
 }
 
 html {
-    scroll-behavior: smooth; /* Rolagem suave para o botão voltar ao topo */
+    scroll-behavior: smooth; /* Rolagem suave ao clicar em links âncora */
 }
 
 body {
     background-color: #f4f7f6;
     color: #333;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s; /* Suaviza a transição para o modo escuro */
 }
 
+/* Cabeçalho principal presente em todas as páginas */
 header {
     background-color: #2e7d32;
     color: white;
@@ -31,6 +43,7 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
+/* Container flexível que centraliza e limita a largura do conteúdo */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -40,9 +53,13 @@ header h1 {
     gap: 30px;
 }
 
-/* ==========================================
+
+/* ============================================================
    2. CLASSES AUXILIARES E ELEMENTOS GERAIS
-   ========================================== */
+   Utilitários reutilizáveis em múltiplas seções e páginas.
+   ============================================================ */
+
+/* Botão de alternância entre modo claro e escuro */
 #btn-dark-mode {
     margin-top: 15px;
     padding: 8px 16px;
@@ -60,28 +77,28 @@ header h1 {
     background-color: #e8f5e9;
 }
 
+/* Lista numerada usada na seção "Como Funciona" */
 .lista-metas {
     margin-top: 10px;
     padding-left: 20px;
 }
 
-/* Espaçamentos do Rodapé (substituindo o CSS inline) */
-.espaco-medio {
-    margin-top: 15px;
-}
+/* Utilitários de espaçamento para o rodapé (evitam estilos inline) */
+.espaco-medio  { margin-top: 15px; }
+.espaco-pequeno { margin-top: 5px; }
 
-.espaco-pequeno {
-    margin-top: 5px;
-}
-
+/* Texto de crédito em tom discreto */
 .texto-credito {
     font-size: 0.9rem;
     color: #a0aec0;
 }
 
-/* ==========================================
-   3. SEÇÃO: SOBRE O PROJETO (GUIAS/TABS)
-   ========================================== */
+
+/* ============================================================
+   3. SEÇÃO: SOBRE O PROJETO (ABAS / TABS)
+   Layout de duas colunas com imagem e abas de conteúdo
+   usado na página inicial (index.html).
+   ============================================================ */
 .area-sobre {
     display: flex;
     width: 100%;
@@ -95,9 +112,8 @@ header h1 {
     min-height: 85vh;
 }
 
-.sobre-imagem {
-    flex: 1;
-}
+/* Coluna da imagem ilustrativa */
+.sobre-imagem { flex: 1; }
 
 .sobre-imagem img {
     width: 100%;
@@ -107,10 +123,10 @@ header h1 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.sobre-tabs {
-    flex: 1.5;
-}
+/* Coluna com as abas de informação */
+.sobre-tabs { flex: 1.5; }
 
+/* Barra de navegação das abas */
 .tabs-header {
     display: flex;
     background: #e0e0e0;
@@ -131,10 +147,9 @@ header h1 {
     transition: all 0.3s ease;
 }
 
-.tab-btn:hover {
-    background: #d5d5d5;
-}
+.tab-btn:hover { background: #d5d5d5; }
 
+/* Aba ativa recebe destaque com borda superior verde */
 .tab-btn.active {
     background: white;
     color: #2e7d32;
@@ -147,33 +162,30 @@ header h1 {
     flex-direction: column;
 }
 
+/* Painéis de conteúdo das abas — ocultos por padrão */
 .tab-content {
     display: none;
     animation: fadeIn 0.4s ease-in-out;
 }
 
-.tab-content h3 {
-    color: #2e7d32;
-    margin-bottom: 15px;
-}
+.tab-content h3      { color: #2e7d32; margin-bottom: 15px; }
+.tab-content p,
+.tab-content ul      { line-height: 1.6; color: #444; }
 
-.tab-content p, .tab-content ul {
-    line-height: 1.6;
-    color: #444;
-}
+/* Painel visível quando a aba está ativa */
+.tab-content.active  { display: block; }
 
-.tab-content.active {
-    display: block;
-}
-
+/* Animação de entrada suave para os painéis */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ==========================================
-   4. SEÇÃO: LOGÍSTICA E REGIÕES
-   ========================================== */
+
+/* ============================================================
+   4. SEÇÃO: LOGÍSTICA E REGIÕES ATENDIDAS
+   Bloco verde escuro com lista de regiões, usado em index.html.
+   ============================================================ */
 .area-regioes {
     display: flex;
     width: 100%;
@@ -187,9 +199,8 @@ header h1 {
     align-items: center;
 }
 
-.regioes-texto {
-    flex: 1;
-}
+/* Coluna de texto com título e botão de ação */
+.regioes-texto { flex: 1; }
 
 .subtitulo-regiao {
     color: #4ade80;
@@ -204,10 +215,10 @@ header h1 {
     margin-bottom: 30px;
 }
 
-.destaque-verde {
-    color: #4ade80;
-}
+/* Palavras em verde claro para destaque visual */
+.destaque-verde { color: #4ade80; }
 
+/* Botão de chamada para ação na seção de regiões */
 .btn-regiao {
     background-color: white;
     color: #0b4f36;
@@ -225,21 +236,21 @@ header h1 {
     transform: scale(1.05);
 }
 
+/* Coluna com a lista de regiões */
 .regioes-lista {
     flex: 1.2;
     display: flex;
     flex-direction: column;
 }
 
+/* Cada item de região separado por linha divisória */
 .item-regiao {
     padding: 20px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Remove a linha debaixo do último item (substituindo o CSS inline) */
-.item-regiao.sem-borda {
-    border-bottom: none;
-}
+/* Remove a linha do último item da lista (evita estilo inline) */
+.item-regiao.sem-borda { border-bottom: none; }
 
 .item-regiao h3 {
     color: #4ade80;
@@ -254,12 +265,16 @@ header h1 {
     color: #e2e8f0;
     line-height: 1.5;
     font-size: 1.05rem;
-    padding-left: 32px;
+    padding-left: 32px; /* Alinha o texto com o título após o ícone */
 }
 
-/* ==========================================
-   5. ÁREA DE CADASTRO E MURAL
-   ========================================== */
+
+/* ============================================================
+   5. ÁREA DE CADASTRO RÁPIDO E MURAL DE TROCAS
+   Sidebar de cadastro e grid de cards usado em index.html.
+   ============================================================ */
+
+/* Card lateral de cadastro rápido */
 .area-cadastro {
     flex: 1;
     min-width: 300px;
@@ -275,24 +290,12 @@ header h1 {
     color: #2e7d32;
 }
 
-.grupo-form {
-    margin-bottom: 15px;
-}
+/* Grupo de campo: label + input empilhados */
+.grupo-form          { margin-bottom: 15px; }
+.grupo-form label    { display: block; margin-bottom: 5px; font-weight: bold; }
+.grupo-form input    { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
 
-.grupo-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.grupo-form input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
+/* Botão de envio de formulários (cadastro e contato) */
 .btn-cadastrar {
     width: 100%;
     padding: 12px;
@@ -306,14 +309,13 @@ header h1 {
     transition: background 0.3s;
 }
 
-.btn-cadastrar:hover {
-    background-color: #e65100;
-}
+.btn-cadastrar:hover { background-color: #e65100; }
 
+/* Área principal do mural de trocas */
 .area-mural {
     flex: 2;
     min-width: 300px;
-    min-height: 75vh; /* Faz o mural ocupar pelo menos 75% da altura da tela */
+    min-height: 75vh;
 }
 
 .titulo-mural {
@@ -321,12 +323,14 @@ header h1 {
     color: #333;
 }
 
+/* Grade responsiva de cards de troca */
 .mural-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
+/* Card individual de oferta/necessidade */
 .card {
     background: white;
     border-radius: 10px;
@@ -334,11 +338,12 @@ header h1 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border-left: 5px solid #2e7d32;
+    border-left: 5px solid #2e7d32; /* Destaque lateral verde */
 }
 
 .card-header { padding: 15px 15px 0 15px; }
 
+/* Etiquetas coloridas que indicam o tipo da oferta */
 .badge {
     padding: 5px 10px;
     color: white;
@@ -350,24 +355,18 @@ header h1 {
     margin-bottom: 10px;
 }
 
-.badge.oferece { background-color: #2e7d32; }
-.badge.precisa { background-color: #ef6c00; }
+.badge.oferece { background-color: #2e7d32; } /* Verde: produtor tem disponível */
+.badge.precisa { background-color: #ef6c00; } /* Laranja: produtor está buscando */
 
 .card-body {
     padding: 0 15px 15px 15px;
     flex-grow: 1;
 }
 
-.card-body h3 {
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
+.card-body h3  { margin-bottom: 10px; font-size: 1.3rem; }
+.card-body p   { margin-bottom: 8px; color: #555; }
 
-.card-body p {
-    margin-bottom: 8px;
-    color: #555;
-}
-
+/* Rodapé do card com botão de ação */
 .card-footer {
     padding: 15px;
     background-color: #f9f9f9;
@@ -375,6 +374,7 @@ header h1 {
     text-align: center;
 }
 
+/* Botão para iniciar uma proposta de troca */
 .btn-trocar {
     background-color: transparent;
     color: #0277bd;
@@ -391,9 +391,12 @@ header h1 {
     color: white;
 }
 
-/* ==========================================
-   6. MODAL DE BOAS VINDAS (POP-UP)
-   ========================================== */
+
+/* ============================================================
+   6. MODAL DE BOAS-VINDAS
+   Pop-up exibido na primeira visita do usuário para
+   capturar o nome e personalizar a experiência.
+   ============================================================ */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -407,6 +410,7 @@ header h1 {
     transition: opacity 0.4s ease;
 }
 
+/* Classe adicionada via JS para exibir o modal */
 .modal-overlay.mostrar {
     opacity: 1;
     visibility: visible;
@@ -425,37 +429,20 @@ header h1 {
     transition: transform 0.4s ease;
 }
 
+/* Animação de descida ao abrir o modal */
 .modal-overlay.mostrar .modal-conteudo { transform: translateY(0); }
 
-.modal-conteudo h2 { color: #2e7d32; margin-bottom: 10px; }
-
-.modal-conteudo input {
-    width: 100%;
-    padding: 12px;
-    margin: 20px 0;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.modal-conteudo button {
-    background-color: #2e7d32;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    transition: background 0.3s;
-}
-
+.modal-conteudo h2     { color: #2e7d32; margin-bottom: 10px; }
+.modal-conteudo input  { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; }
+.modal-conteudo button { background-color: #2e7d32; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: bold; width: 100%; transition: background 0.3s; }
 .modal-conteudo button:hover { background-color: #1b5e20; }
 
-/* ==========================================
-   7. RODAPÉ (FOOTER)
-   ========================================== */
+
+/* ============================================================
+   7. RODAPÉ PRINCIPAL
+   Rodapé completo com logo, links de navegação, redes sociais
+   e créditos do projeto.
+   ============================================================ */
 .rodape-principal {
     background-color: #0b4f36;
     color: #e2e8f0;
@@ -468,16 +455,10 @@ header h1 {
     margin: 0 auto;
 }
 
-.rodape-principal a {
-    color: #e2e8f0;
-    text-decoration: none;
-    transition: color 0.3s;
-}
+.rodape-principal a            { color: #e2e8f0; text-decoration: none; transition: color 0.3s; }
+.rodape-principal a:hover      { color: #4ade80; }
 
-.rodape-principal a:hover {
-    color: #4ade80;
-}
-
+/* Linha superior: logo + ícones de redes sociais */
 .rodape-topo {
     display: flex;
     justify-content: space-between;
@@ -485,26 +466,14 @@ header h1 {
     margin-bottom: 30px;
 }
 
-.rodape-logo h2 { color: white; font-size: 2rem; }
+.rodape-logo h2  { color: white; font-size: 2rem; }
+.rodape-redes    { display: flex; align-items: center; gap: 20px; }
+.icones-redes    { display: flex; gap: 15px; font-size: 1.5rem; }
 
-.rodape-redes {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+/* Linha divisória sutil entre as seções do rodapé */
+.divisor-rodape  { border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 30px 0; }
 
-.icones-redes {
-    display: flex;
-    gap: 15px;
-    font-size: 1.5rem;
-}
-
-.divisor-rodape {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 30px 0;
-}
-
+/* Linha intermediária: informações do projeto e links rápidos */
 .rodape-meio {
     display: flex;
     justify-content: space-between;
@@ -512,18 +481,15 @@ header h1 {
     gap: 40px;
 }
 
-.rodape-coluna h3 {
-    color: white;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.info-projeto { flex: 2; min-width: 300px; }
-.info-projeto p { line-height: 1.6; color: #cbd5e1; }
-.links-rapidos, .links-ajuda { flex: 1; min-width: 150px; }
-.rodape-coluna ul { list-style: none; padding: 0; }
+.rodape-coluna h3   { color: white; margin-bottom: 20px; font-size: 1.2rem; }
+.info-projeto       { flex: 2; min-width: 300px; }
+.info-projeto p     { line-height: 1.6; color: #cbd5e1; }
+.links-rapidos,
+.links-ajuda        { flex: 1; min-width: 150px; }
+.rodape-coluna ul   { list-style: none; padding: 0; }
 .rodape-coluna ul li { margin-bottom: 12px; }
 
+/* Linha inferior: copyright e botão voltar ao topo */
 .rodape-base {
     display: flex;
     justify-content: space-between;
@@ -534,12 +500,9 @@ header h1 {
     color: #a0aec0;
 }
 
-.rodape-marca {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+.rodape-marca { display: flex; align-items: center; gap: 20px; }
 
+/* Botão circular para rolar de volta ao topo da página */
 .btn-voltar-topo {
     background-color: #166534;
     color: white;
@@ -561,15 +524,19 @@ header h1 {
     transform: translateY(-3px);
 }
 
-/* ==========================================
+
+/* ============================================================
    8. MODO ESCURO (DARK MODE)
-   ========================================== */
+   Sobrescreve cores base quando a classe .dark-mode é aplicada
+   ao <body> via JavaScript.
+   ============================================================ */
 body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
 }
 
-body.dark-mode .card, 
+/* Superfícies de cards e seções no modo escuro */
+body.dark-mode .card,
 body.dark-mode .area-cadastro,
 body.dark-mode .area-sobre {
     background: #1e1e1e;
@@ -577,129 +544,133 @@ body.dark-mode .area-sobre {
     box-shadow: 0 4px 8px rgba(255,255,255,0.05);
 }
 
-body.dark-mode h2, 
+/* Títulos em verde claro para manter contraste */
+body.dark-mode h2,
 body.dark-mode .card-body h3,
 body.dark-mode .titulo-mural,
-body.dark-mode .tab-content h3 {
-    color: #81c784; 
-}
+body.dark-mode .tab-content h3 { color: #81c784; }
 
-body.dark-mode .card-body p, 
+/* Textos secundários em tom suave */
+body.dark-mode .card-body p,
 body.dark-mode .tab-content p,
-body.dark-mode .tab-content ul {
-    color: #bbb;
-}
+body.dark-mode .tab-content ul  { color: #bbb; }
 
-body.dark-mode .card-footer {
-    background-color: #2c2c2c;
-    border-top: 1px solid #444;
-}
+/* Rodapé dos cards no modo escuro */
+body.dark-mode .card-footer      { background-color: #2c2c2c; border-top: 1px solid #444; }
 
-body.dark-mode .modal-conteudo {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    border-color: #444;
-}
+/* Modal adaptado ao modo escuro */
+body.dark-mode .modal-conteudo   { background: #1e1e1e; color: #e0e0e0; border-color: #444; }
 
-body.dark-mode input {
-    background-color: #333;
-    color: white;
-    border: 1px solid #555;
-}
+/* Campos de formulário com fundo escuro */
+body.dark-mode input             { background-color: #333; color: white; border: 1px solid #555; }
+body.dark-mode textarea          { background-color: #333; color: white; border: 1px solid #555; }
 
-body.dark-mode .tabs-header { background: #333; }
-body.dark-mode .tab-btn { color: #aaa; }
-body.dark-mode .tab-btn:hover { background: #444; }
-body.dark-mode .tab-btn.active { 
-    background: #1e1e1e; 
-    color: #81c784; 
-    border-top-color: #81c784; 
-}
+/* Abas adaptadas ao modo escuro */
+body.dark-mode .tabs-header      { background: #333; }
+body.dark-mode .tab-btn          { color: #aaa; }
+body.dark-mode .tab-btn:hover    { background: #444; }
+body.dark-mode .tab-btn.active   { background: #1e1e1e; color: #81c784; border-top-color: #81c784; }
 
-body.dark-mode #btn-dark-mode {
-    background-color: #1e1e1e;
-    color: #81c784;
-    border: 1px solid #444;
-}
+/* Botão de alternância de tema no modo escuro */
+body.dark-mode #btn-dark-mode       { background-color: #1e1e1e; color: #81c784; border: 1px solid #444; }
+body.dark-mode #btn-dark-mode:hover { background-color: #333; }
 
-body.dark-mode #btn-dark-mode:hover {
-    background-color: #333;
-}
+/* Links de voltar adaptados ao modo escuro */
+body.dark-mode .link-voltar         { color: #81c784; }
+body.dark-mode .link-voltar:hover   { color: #a5d6a7; }
 
-/* ==========================================
-   9. RESPONSIVIDADE (MEDIA QUERIES)
-   ========================================== */
+/* Parágrafos do FAQ adaptados ao modo escuro */
+body.dark-mode .pergunta-faq p      { color: #bbb; }
+
+
+/* ============================================================
+   9. RESPONSIVIDADE
+   Ajustes de layout para telas menores que 768px (mobile).
+   ============================================================ */
 @media (max-width: 768px) {
+    /* Empilha os elementos do container verticalmente */
     .container { flex-direction: column; }
     .area-cadastro, .area-mural, .area-sobre { width: 100%; }
-    
-    .area-sobre { 
-        flex-direction: column; 
-        min-height: auto; 
-        padding: 30px; 
-    }
-    
-    .sobre-imagem img { height: auto; }
-    header h1 { font-size: 2rem; }
 
-    .area-regioes {
-    display: flex;
-    width: 100%;
-    background-color: #0b4f36;
-    color: white;
-    padding: 60px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    margin-top: 10vh; /* Empurra a parte verde bem mais para baixo */
-    margin-bottom: 50px;
-    gap: 50px;
-    align-items: center;
-}
-    
-    .regioes-texto h2 { font-size: 2.2rem; }
-    .item-regiao p { padding-left: 0; }
-    .item-regiao h3 { justify-content: center; }
-
-    .rodape-topo, .rodape-meio, .rodape-base {
+    /* Seção "Sobre" vira coluna única no mobile */
+    .area-sobre {
         flex-direction: column;
-        text-align: center;
-        gap: 20px;
+        min-height: auto;
+        padding: 30px;
     }
+
+    .sobre-imagem img { height: auto; }
+    header h1         { font-size: 2rem; }
+
+    /* Seção de regiões no mobile */
+    .area-regioes {
+        display: flex;
+        width: 100%;
+        background-color: #0b4f36;
+        color: white;
+        padding: 60px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        margin-top: 10vh;
+        margin-bottom: 50px;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .regioes-texto h2         { font-size: 2.2rem; }
+    .item-regiao p            { padding-left: 0; }
+    .item-regiao h3           { justify-content: center; }
+
+    /* Rodapé empilhado em coluna única no mobile */
+    .rodape-topo,
+    .rodape-meio,
+    .rodape-base              { flex-direction: column; text-align: center; gap: 20px; }
 }
 
-/* ==========================================
-   AJUSTE DE NAVEGAÇÃO DOS LINKS ÂNCORA
-   ========================================== */
+
+/* ============================================================
+   ANCORAGEM DE SEÇÕES
+   Garante que o conteúdo não fique oculto pelo header fixo
+   ao navegar por links âncora internos.
+   ============================================================ */
 #sobre,
-#mural-trocas {
-    scroll-margin-top: 60px; /* Cria uma margem invisível no topo para o link não cortar o título */
-}
+#mural-trocas                { scroll-margin-top: 60px; }
+
+#como-funciona,
+#faq,
+#fale-conosco                { scroll-margin-top: 40px; }
 
 
-/* ==========================================
+/* ============================================================
    10. PÁGINA DE CADASTRO (cadastro.html)
-   ========================================== */
+   Sobrescreve o layout padrão do container para centralizar
+   o formulário de cadastro de produtor.
+   ============================================================ */
+
+/* Container centralizado da página de cadastro */
 .container-cadastro {
     justify-content: center;
     margin-top: 50px;
     min-height: 50vh;
 }
 
+/* Formulário com largura máxima definida, sem crescimento flex */
 .area-cadastro-pagina {
-    flex: none; /* Remove o comportamento flex padrão da página principal */
+    flex: none;
     width: 100%;
-    max-width: 600px; /* Impede que o formulário fique largo demais */
+    max-width: 600px;
 }
 
-.mt-20 {
-    margin-top: 20px;
-}
+/* Utilitário de margem superior de 20px */
+.mt-20 { margin-top: 20px; }
 
+/* Container do link de voltar, centralizado */
 .voltar-container {
     text-align: center;
     margin-top: 20px;
 }
 
+/* Link de retorno à página anterior */
 .link-voltar {
     color: #2e7d32;
     font-weight: bold;
@@ -712,56 +683,64 @@ body.dark-mode #btn-dark-mode:hover {
     text-decoration: underline;
 }
 
-/* Ajuste do link de voltar para o Modo Escuro */
-body.dark-mode .link-voltar {
-    color: #81c784;
-}
 
-body.dark-mode .link-voltar:hover {
-    color: #a5d6a7;
-}
-
-/* ==========================================
+/* ============================================================
    11. PÁGINA DE AJUDA (ajuda.html)
-   ========================================== */
+   Ajustes específicos para a central de ajuda: FAQ,
+   como funciona e formulário de contato.
+   ============================================================ */
+
+/* Remove a altura mínima grande herdada de .area-sobre */
 .area-ajuda {
-    min-height: auto; /* Remove a altura gigante da página inicial */
+    min-height: auto;
     padding: 40px;
 }
 
-.texto-ajuda {
-    width: 100%;
-}
+/* Texto da ajuda ocupa toda a largura disponível */
+.texto-ajuda { width: 100%; }
 
-.pergunta-faq h3 {
-    margin-bottom: 8px;
-}
+/* Espaçamento interno das perguntas do FAQ */
+.pergunta-faq h3 { margin-bottom: 8px; }
+.pergunta-faq p  { color: #555; line-height: 1.5; }
 
-.pergunta-faq p {
+/* Espaçamento extra entre perguntas do FAQ */
+.espacamento-faq { margin-top: 20px; }
+
+/* Subtítulo da seção Fale Conosco */
+.subtitulo-fale-conosco {
     color: #555;
-    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
-body.dark-mode .pergunta-faq p {
-    color: #bbb;
+/* Seção Fale Conosco com largura total */
+.sec-fale-conosco {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-body.dark-mode textarea {
-    background-color: #333;
-    color: white;
-    border: 1px solid #555;
+/* Estilo do textarea do formulário de contato */
+.campo-mensagem {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
 }
 
-/* Garante que os links parem no enquadramento perfeito */
-#como-funciona, #faq, #fale-conosco {
-    scroll-margin-top: 40px;
-}
 
-/* ==========================================
+/* ============================================================
    12. STATUS: EM NEGOCIAÇÃO
-   ========================================== */
+   Estilo do botão quando uma troca já está em andamento,
+   bloqueando novas propostas para aquele item.
+   ============================================================ */
+
+/* Botão desabilitado — indica troca em negociação */
 .btn-negociacao {
-    background-color: #f59e0b; /* Laranja de espera */
+    background-color: #f59e0b;
     color: white;
     border-color: #f59e0b;
     cursor: not-allowed;
@@ -771,14 +750,17 @@ body.dark-mode textarea {
 .btn-negociacao:hover {
     background-color: #f59e0b;
     color: white;
-    transform: none; /* Remove o efeito de crescer */
+    transform: none; /* Remove o efeito hover padrão */
 }
 
-/* =========================================
-   ESTILOS DAS NOTIFICAÇÕES E NOVOS BOTÕES
-========================================= */
 
-/* Botões do Mural quando a proposta já foi feita */
+/* ============================================================
+   13. SISTEMA DE NOTIFICAÇÕES E PROPOSTAS
+   Estilos do painel de notificações e botões de ação
+   para aceitar, recusar ou cancelar propostas de troca.
+   ============================================================ */
+
+/* Botão exibido no card quando a proposta já foi enviada */
 .btn-em-analise {
     background-color: #f39c12;
     color: white;
@@ -789,6 +771,7 @@ body.dark-mode textarea {
     font-weight: bold;
 }
 
+/* Botão para cancelar uma proposta já enviada */
 .btn-cancelar {
     background-color: #e74c3c;
     color: white;
@@ -801,11 +784,9 @@ body.dark-mode textarea {
     transition: background 0.3s;
 }
 
-.btn-cancelar:hover {
-    background-color: #c0392b;
-}
+.btn-cancelar:hover { background-color: #c0392b; }
 
-/* Painel de Notificações */
+/* Painel central de notificações recebidas */
 #painel-notificacoes {
     margin: 20px auto;
     max-width: 800px;
@@ -815,6 +796,7 @@ body.dark-mode textarea {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Título do painel com linha divisória verde */
 .titulo-notificacao {
     color: #2d5a27;
     border-bottom: 2px solid #4CAF50;
@@ -822,11 +804,13 @@ body.dark-mode textarea {
     margin-top: 0;
 }
 
+/* Texto exibido quando não há notificações */
 .notificacao-vazia {
     color: #666;
     font-style: italic;
 }
 
+/* Card individual de notificação de proposta recebida */
 .card-notificacao {
     border: 1px solid #cce5cc;
     padding: 15px;
@@ -840,16 +824,10 @@ body.dark-mode textarea {
     gap: 10px;
 }
 
-.texto-notificacao {
-    margin: 0;
-    color: #333;
-}
+.texto-notificacao  { margin: 0; color: #333; }
+.botoes-notificacao { display: flex; gap: 10px; }
 
-.botoes-notificacao {
-    display: flex;
-    gap: 10px;
-}
-
+/* Botão para aceitar uma proposta de troca recebida */
 .btn-aceitar-notificacao {
     background-color: #4CAF50;
     color: white;
@@ -861,10 +839,9 @@ body.dark-mode textarea {
     transition: background 0.3s;
 }
 
-.btn-aceitar-notificacao:hover {
-    background-color: #45a049;
-}
+.btn-aceitar-notificacao:hover { background-color: #45a049; }
 
+/* Botão para recusar uma proposta de troca recebida */
 .btn-recusar-notificacao {
     background-color: #e53935;
     color: white;
@@ -876,6 +853,4 @@ body.dark-mode textarea {
     transition: background 0.3s;
 }
 
-.btn-recusar-notificacao:hover {
-    background-color: #c62828;
-}
+.btn-recusar-notificacao:hover { background-color: #c62828; }
