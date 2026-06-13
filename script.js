@@ -269,7 +269,9 @@ if (formDadosPessoais) {
         }
 
         alert('✅ Cadastro realizado com sucesso! Bem-vindo à rede Semeando Trocas.');
-        window.location.href = 'index.html';
+        
+        // AQUI ESTÁ A ALTERAÇÃO: Forçando o redirecionamento de forma relativa
+        window.location.assign('./index.html'); 
     });
 }
 
