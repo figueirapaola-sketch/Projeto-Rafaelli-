@@ -854,4 +854,23 @@ body.dark-mode .pergunta-faq p      { color: #bbb; }
     transition: background 0.3s;
 }
 
-.btn-recusar-notificacao:hover { background-color: #c62828; }
+.btn-recusar-notificacao:hover { 
+    background-color: #c62828; 
+}
+
+/* Efeitos visuais para os botões de leitura */
+#botao-ler {
+    transition: background-color 0.3s;
+}
+
+#botao-ler:hover {
+    background-color: #45a049 !important; /* Verde mais escuro */
+}
+
+#botao-parar {
+    transition: background-color 0.3s;
+}
+
+#botao-parar:hover {
+    background-color: #d32f2f !important; /* Vermelho mais escuro */
+}

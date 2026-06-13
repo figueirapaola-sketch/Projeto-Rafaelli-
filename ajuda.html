@@ -15,10 +15,21 @@
     <header>
         <h1>🌱 Central de Ajuda</h1>
         <p>Tire suas dúvidas, entenda o projeto e fale com nossa equipe.</p>
-        <button id="btn-dark-mode">🌙 Modo Escuro</button>
+        
+        <!-- BOTÕES ADICIONADOS AQUI NO CABEÇALHO -->
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+            <button id="botao-ler" style="background-color: #4CAF50; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+                🔊 Ouvir a página
+            </button>
+            <button id="botao-parar" style="background-color: #f44336; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+                ⏹️ Parar
+            </button>
+            <button id="btn-dark-mode">🌙 Modo Escuro</button>
+        </div>
     </header>
  
-    <div class="container container-ajuda">
+    <!-- ID 'conteudo-projeto' ADICIONADO AQUI PARA O LEITOR FOCAR NO CONTEÚDO PRINCIPAL -->
+    <div id="conteudo-projeto" class="container container-ajuda">
  
         <div class="voltar-container">
             <a href="index.html" class="link-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar para o início</a>

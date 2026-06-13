@@ -604,3 +604,36 @@ function atualizarPainelDeNotificacoes() {
         painel.innerHTML += notificacaoHTML;
     });
 }
+
+// --- SISTEMA DE LEITURA DE TELA (ACESSIBILIDADE) ---
+
+// Selecionamos os elementos
+const botaoLer = document.getElementById('botao-ler');
+const botaoParar = document.getElementById('botao-parar');
+const conteudo = document.getElementById('conteudo-projeto');
+
+// O "if" verifica se o botão e o conteúdo existem na página atual para não dar erro
+if (botaoLer && conteudo) {
+    botaoLer.addEventListener('click', () => {
+        // Pega apenas o texto limpo, sem os códigos HTML
+        const textoParaLer = conteudo.innerText;
+        
+        // Para qualquer leitura que já esteja acontecendo
+        window.speechSynthesis.cancel(); 
+        
+        // Prepara a voz
+        const pronuncia = new SpeechSynthesisUtterance(textoParaLer);
+        pronuncia.lang = 'pt-BR'; // Português do Brasil
+        pronuncia.rate = 1.0;     // Velocidade (1.0 é o normal)
+        
+        // Inicia a leitura
+        window.speechSynthesis.speak(pronuncia);
+    });
+}
+
+if (botaoParar) {
+    botaoParar.addEventListener('click', () => {
+        // Cancela a fala imediatamente
+        window.speechSynthesis.cancel();
+    });
+}
